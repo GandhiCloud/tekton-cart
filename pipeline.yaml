@@ -19,17 +19,48 @@ spec:
       - name: image-registry
         type: image
   steps:
+    - name: list-src1
+      image: alpine
+      command:
+        - "echo"
+      args:
+        - "Docker file value is -> $(inputs.params.pathToDockerFile)" 
+    - name: list-src2
+      image: alpine
+      command:
+        - "ls"
+      args:
+        - "/workspace" 
+    - name: list-src3
+      image: alpine
+      command:
+        - "ls"
+      args:
+        - "/workspace/git-repo" 
+    - name: list-src4
+      image: alpine
+      command:
+        - "echo"
+      args:
+        - "image url $(outputs.resources.image-registry.url)" 
+    - name: list-src
+      image: alpine
+      command:
+        - "ls"
+      args:
+        - "$(inputs.resources.git-repo.path)"
     - name: build-and-push
       image: gcr.io/kaniko-project/executor:v0.10.0
       env:
-        - name: "DOCKER_CONFIG"
-          value: "/builder/home/.docker/"
+        - name: DOCKER_CONFIG
+          value: /builder/home/.docker
       command:
         - /kaniko/executor
       args:
-        - --dockerfile=${inputs.params.pathToDockerFile}
-        - --destination=${outputs.resources.image-registry.url}
-        - --context=${inputs.params.pathToContext}
+        - "--dockerfile=$(inputs.params.pathToDockerFile)"
+        - "--destination=$(outputs.resources.image-registry.url)"
+        - "--context=$(inputs.params.pathToContext)"
+
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
@@ -42,7 +73,7 @@ spec:
     - name: image-registry
       type: image
   tasks:
-    - name: build-docker-image
+    - name: tekton-cart-build-docker-image
       taskRef:
         name: build-docker-image
       params:

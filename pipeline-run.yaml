@@ -1,8 +1,9 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineRun
 metadata:
-  name: tekton-cart-pipeline-run-01
+  name: tekton-cart-pipeline-run-06
 spec:
+  serviceAccount: tekton-cart-service-account
   pipelineRef:
     name: tekton-cart-pipeline
   resources:
