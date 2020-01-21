@@ -9,5 +9,7 @@ oc apply -f docker-secret.yaml
 
 oc apply -f pipeline-resources.yaml
 oc apply -f pipeline.yaml
+oc delete -f pipeline.yaml
 
+oc delete -f pipeline-run.yaml
 oc apply -f pipeline-run.yaml

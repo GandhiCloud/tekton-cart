@@ -10,10 +10,10 @@ spec:
     params:
       - name: pathToDockerFile
         description: Path to Dockerfile
-        default: /workspace/git-repo/001-tekton-sample/Dockerfile
+        default: /workspace/git-repo/Dockerfile
       - name: pathToContext
         description: The build context used by Kaniko
-        default: /workspace/git-repo/001-tekton-sample
+        default: /workspace/git-repo
   outputs:
     resources:
       - name: image-registry
@@ -47,9 +47,9 @@ spec:
         name: build-docker-image
       params:
         - name: pathToDockerFile
-          value: /workspace/git-repo/001-tekton-sample/Dockerfile
+          value: /workspace/git-repo/Dockerfile
         - name: pathToContext
-          value: /workspace/git-repo/001-tekton-sample
+          value: /workspace/git-repo
       resources:
         inputs:
           - name: git-repo
