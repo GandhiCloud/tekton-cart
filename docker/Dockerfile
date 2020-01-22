@@ -1,7 +1,7 @@
 FROM maven:3.5.3-jdk-8-alpine
 # FROM maven:3.5.4-jdk-10-slim
 WORKDIR /usr/src/java-code
-COPY ../app /usr/src/java-code/
+COPY ./app /usr/src/java-code/
 RUN mvn package
  
 WORKDIR /usr/src/java-app

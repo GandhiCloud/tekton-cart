@@ -7,8 +7,6 @@ spec:
     resources:
       - name: git-repo
         type: git
-      - name: image-registry
-        type: image  
     params:
       - name: pathToDeploymentFiles
         description: Path to deployment yaml files

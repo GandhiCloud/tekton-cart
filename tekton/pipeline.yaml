@@ -25,15 +25,13 @@ spec:
           - name: image-registry
             resource: image-registry
     - name: task-deploy-using-kubectl
+      runAfter: [task-build-docker-image]  
       taskRef:
         name: deploy-using-kubectl
-      params:
-        - name: pathToDeploymentFiles
-          value: /workspace/git-repo/deployment/tekton-cart/
       resources:
         inputs:
           - name: git-repo
             resource: git-repo
-        outputs:
-          - name: image-registry
-            resource: image-registry
+      params:
+        - name: pathToDeploymentFiles
+          value: /workspace/git-repo/deployment/tekton-cart/
