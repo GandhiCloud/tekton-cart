@@ -1,5 +1,3 @@
----
-# Source: mwallet-app/templates/service-corebanking.yaml
 apiVersion: v1
 kind: Service
 metadata:
