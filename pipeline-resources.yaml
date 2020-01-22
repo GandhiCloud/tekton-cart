@@ -18,5 +18,6 @@ spec:
   type: image
   params:
     - name: url
-      value: gandhicloud/tekton-cart
+      # value: gandhicloud/tekton-cart
       # value: index.docker.io/gandhicloud/tekton-cart
+      value: docker.io/gandhicloud/tekton-cart
