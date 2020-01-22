@@ -32,8 +32,13 @@ oc apply -f pipeline.yaml
 oc delete -f pipeline-run.yaml
 oc apply -f pipeline-run.yaml
 
-error checking push permissions -- make sure you entered the correct tag name, and that you are authenticated correctly, and try again: checking push permission for "index.docker.io/gandhicloud/tekton-cart:latest": UNAUTHORIZED: authentication required; [map[Action:pull Class: Name:gandhicloud/tekton-cart Type:repository] map[Action:push Class: Name:gandhicloud/tekton-cart Type:repository]]
+
+docker run -p 8080:8080 test-1
 
 error checking push permissions -- make sure you entered the correct tag name, and that you are authenticated correctly, and try again: checking push permission for "index.docker.io/gandhicloud/tekton-cart:latest": UNAUTHORIZED: authentication required; [map[Action:pull Class: Name:gandhicloud/tekton-cart Type:repository] map[Action:push Class: Name:gandhicloud/tekton-cart Type:repository]]
 
 error checking push permissions -- make sure you entered the correct tag name, and that you are authenticated correctly, and try again: checking push permission for "index.docker.io/gandhicloud/tekton-cart:latest": UNAUTHORIZED: authentication required; [map[Action:pull Class: Name:gandhicloud/tekton-cart Type:repository] map[Action:push Class: Name:gandhicloud/tekton-cart Type:repository]]
+
+error checking push permissions -- make sure you entered the correct tag name, and that you are authenticated correctly, and try again: checking push permission for "index.docker.io/gandhicloud/tekton-cart:latest": UNAUTHORIZED: authentication required; [map[Action:pull Class: Name:gandhicloud/tekton-cart Type:repository] map[Action:push Class: Name:gandhicloud/tekton-cart Type:repository]]
+
+error checking push permissions -- make sure you entered the correct tag name, and that you are authenticated correctly, and try again: checking push permission for "index.docker.io/gandhicloud/tekton-cart:latest": UNAUTHORIZED: authentication required; [map[Type:repository Class: Name:gandhicloud/tekton-cart Action:pull] map[Name:gandhicloud/tekton-cart Action:push Type:repository Class:]]

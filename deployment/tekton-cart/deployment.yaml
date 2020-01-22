@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: tekton-cart-deployment
+  namespace: tekton-cart-pro
+  labels:
+    app: tekton-cart-app
+    name: tekton-cart-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tekton-cart-app
+      name: tekton-cart-deployment
+  template:
+    metadata:
+      labels:
+        app: tekton-cart-app
+        name: tekton-cart-deployment
+    spec:
+      containers:
+        - name: tekton-cart-deployment
+          image: "gandhicloud/tekton-cart:latest"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP

@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: deploy-using-kubectl
+spec:
+  inputs:
+    resources:
+      - name: git-repo
+        type: git
+      - name: image-registry
+        type: image  
+    params:
+      - name: pathToDeploymentFiles
+        description: Path to deployment yaml files
+        default: /workspace/git-repo/deployment/tekton-cart/
+  steps:
+    - name: run-kubectl
+      image: lachlanevenson/k8s-kubectl
+      command: ["kubectl"]
+      args:
+        - "apply"
+        - "-f"
+        - "$(inputs.params.pathToDeploymentFiles)"
+        - "--validate=false"

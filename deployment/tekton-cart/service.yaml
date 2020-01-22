@@ -1,0 +1,20 @@
+---
+# Source: mwallet-app/templates/service-corebanking.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: tekton-cart-service
+  namespace: tekton-cart-pro
+  labels:
+    app: tekton-cart-app
+  annotations:
+    prometheus.io/scrape: 'true' 
+    prometheus.io/port: '8080'     
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: tekton-cart-app
