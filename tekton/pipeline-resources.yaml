@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: git-repo
+  name: tekton-cart-git-repo
 spec:
   type: git
   params:
@@ -13,7 +13,7 @@ spec:
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: image-registry
+  name: tekton-cart-image-registry
 spec:
   type: image
   params:

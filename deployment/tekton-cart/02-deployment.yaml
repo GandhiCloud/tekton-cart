@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: tekton-cart-deployment
-          image: "gandhicloud/tekton-cart:latest"
+          image: __IMAGE__
           imagePullPolicy: Always
           ports:
             - name: http

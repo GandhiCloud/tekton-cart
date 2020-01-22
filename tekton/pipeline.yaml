@@ -8,15 +8,35 @@ spec:
       type: git
     - name: image-registry
       type: image
+  params:  
+    - name: pathToDockerFile
+      description: Path to Dockerfile
+      default: /workspace/git-repo/docker/Dockerfile
+    - name: pathToContext
+      description: The build context used by Kaniko
+      default: /workspace/git-repo
+    - name: pathToDeploymentFiles
+      description: kubectl yaml files
+      default: "/workspace/git-repo/deployment/tekton-cart"
+    - name: imageUrl
+      description: Url of image repository
+      default: "$(resources.image-registry.url)"
+    - name: imageTag
+      description: Tag of the images to be used.
+      default: "latest"
   tasks:
     - name: task-build-docker-image
       taskRef:
         name: build-docker-image
       params:
         - name: pathToDockerFile
-          value: /workspace/git-repo/docker/Dockerfile
+          value: "${params.pathToDockerFile}"
         - name: pathToContext
-          value: /workspace/git-repo
+          value: "${params.pathToContext}"
+        - name: imageUrl
+          value: "${params.imageUrl}"
+        - name: imageTag
+          value: "${params.imageTag}"
       resources:
         inputs:
           - name: git-repo
@@ -28,10 +48,14 @@ spec:
       runAfter: [task-build-docker-image]  
       taskRef:
         name: deploy-using-kubectl
+      params:
+        - name: pathToDeploymentFiles
+          value: "${params.pathToDeploymentFiles}"
+        - name: imageUrl
+          value: "${params.imageUrl}"
+        - name: imageTag
+          value: "${params.imageTag}"
       resources:
         inputs:
           - name: git-repo
             resource: git-repo
-      params:
-        - name: pathToDeploymentFiles
-          value: /workspace/git-repo/deployment/tekton-cart/

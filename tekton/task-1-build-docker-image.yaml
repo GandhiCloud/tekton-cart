@@ -14,6 +14,12 @@ spec:
       - name: pathToContext
         description: The build context used by Kaniko
         default: /workspace/git-repo
+      - name: imageUrl
+        description: Url of image repository
+        default: "$(outputs.resources.image-registry.url)"
+      - name: imageTag
+        description: Tag of the images to be used.
+        default: "latest"        
   outputs:
     resources:
       - name: image-registry
@@ -24,25 +30,37 @@ spec:
       command:
         - "echo"
       args:
-        - "Docker file value is -> $(inputs.params.pathToDockerFile)" 
+        - "pathToDockerFile -> $(inputs.params.pathToDockerFile)" 
     - name: list-src2
       image: alpine
       command:
-        - "ls"
+        - "echo"
       args:
-        - "/workspace" 
+        - "pathToContext -> $(inputs.params.pathToContext)" 
     - name: list-src3
       image: alpine
       command:
-        - "ls"
+        - "echo"
       args:
-        - "/workspace/git-repo" 
+        - "imageUrl -> $(inputs.params.imageUrl)" 
     - name: list-src4
       image: alpine
       command:
         - "echo"
       args:
-        - "image url $(outputs.resources.image-registry.url)" 
+        - "imageTag -> $(inputs.params.imageTag)" 
+    - name: list-src5
+      image: alpine
+      command:
+        - "ls"
+      args:
+        - "/workspace" 
+    - name: list-src6
+      image: alpine
+      command:
+        - "ls"
+      args:
+        - "/workspace/git-repo" 
     - name: list-src
       image: alpine
       command:
@@ -58,5 +76,5 @@ spec:
         - /kaniko/executor
       args:
         - "--dockerfile=$(inputs.params.pathToDockerFile)"
-        - "--destination=$(outputs.resources.image-registry.url)"
+        - "--destination=$(inputs.params.imageUrl):$(inputs.params.imageTag)"
         - "--context=$(inputs.params.pathToContext)"

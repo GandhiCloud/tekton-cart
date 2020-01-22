@@ -1,15 +1,26 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineRun
 metadata:
-  name: tekton-cart-pipeline-run-06
+  generateName: tekton-cart-pipeline-run-
 spec:
   serviceAccount: tekton-cart-service-account
   pipelineRef:
     name: tekton-cart-pipeline
+  params:  
+    - name: pathToDockerFile
+      value: "/workspace/git-repo/docker/Dockerfile"
+    - name: pathToContext
+      value: "/workspace/git-repo"
+    - name: pathToDeploymentFiles
+      value: "/workspace/git-repo/deployment/tekton-cart"
+    - name: imageUrl
+      default: "docker.io/gandhicloud/tekton-cart"
+    - name: imageTag
+      default: "0.0.1"
   resources:
     - name: git-repo
       resourceRef:
-        name: git-repo
+        name: tekton-cart-git-repo
     - name: image-registry
       resourceRef:
-        name: image-registry
+        name: tekton-cart-image-registry
