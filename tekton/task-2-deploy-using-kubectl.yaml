@@ -21,13 +21,13 @@ spec:
         default: "latest"
   steps:
     - name: update-yaml
-    image: alpine
-    command: ["sed"]
-    args:
-      - "-i"
-      - "-e"
-      - "s;__IMAGE__;${inputs.params.imageUrl}:${inputs.params.imageTag};g"
-      - "${inputs.params.pathToDeploymentFiles}/02-deployment.yaml"
+      image: alpine
+      command: ["sed"]
+      args:
+        - "-i"
+        - "-e"
+        - "s;__IMAGE__;$(inputs.params.imageUrl):$(inputs.params.imageTag);g"
+        - "$(inputs.params.pathToDeploymentFiles)/02-deployment.yaml"
     - name: run-kubectl
       image: lachlanevenson/k8s-kubectl
       command: ["kubectl"]

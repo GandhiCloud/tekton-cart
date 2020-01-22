@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineRun
 metadata:
-  generateName: tekton-cart-pipeline-run-
+  name: tekton-cart-pipeline-run-02
 spec:
   serviceAccount: tekton-cart-service-account
   pipelineRef:
@@ -14,9 +14,9 @@ spec:
     - name: pathToDeploymentFiles
       value: "/workspace/git-repo/deployment/tekton-cart"
     - name: imageUrl
-      default: "docker.io/gandhicloud/tekton-cart"
+      value: "docker.io/gandhicloud/tekton-cart"
     - name: imageTag
-      default: "0.0.1"
+      value: "0.0.2"
   resources:
     - name: git-repo
       resourceRef:

@@ -30,13 +30,13 @@ spec:
         name: build-docker-image
       params:
         - name: pathToDockerFile
-          value: "${params.pathToDockerFile}"
+          value: "$(params.pathToDockerFile)"
         - name: pathToContext
-          value: "${params.pathToContext}"
+          value: "$(params.pathToContext)"
         - name: imageUrl
-          value: "${params.imageUrl}"
+          value: "$(params.imageUrl)"
         - name: imageTag
-          value: "${params.imageTag}"
+          value: "$(params.imageTag)"
       resources:
         inputs:
           - name: git-repo
@@ -50,12 +50,14 @@ spec:
         name: deploy-using-kubectl
       params:
         - name: pathToDeploymentFiles
-          value: "${params.pathToDeploymentFiles}"
+          value: "$(params.pathToDeploymentFiles)"
         - name: imageUrl
-          value: "${params.imageUrl}"
+          value: "$(params.imageUrl)"
         - name: imageTag
-          value: "${params.imageTag}"
+          value: "$(params.imageTag)"
       resources:
         inputs:
           - name: git-repo
             resource: git-repo
+          - name: image-registry
+            resource: image-registry
